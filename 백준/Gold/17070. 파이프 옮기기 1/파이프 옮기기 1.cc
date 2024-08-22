@@ -16,11 +16,9 @@ struct pipe
 };
 int sum = 0;
 int mp[17][17];
-int dp[17][17];
 void func(int x, int y, int p) {
 	queue<pipe>q;
 	q.push(pipe(x, y, p));
-	dp[x][y] = 1;
 	while (!q.empty()) {
 		int dx = q.front().x;
 		int dy = q.front().y;
@@ -42,7 +40,6 @@ void func(int x, int y, int p) {
 					else if (i == 1 && (mp[nx[i]][ny[i]] == 1 || mp[dx][ny[i]] == 1 || mp[nx[i]][dy] == 1)) {
 						continue;
 					}
-					dp[nx[i]][ny[i]] += dp[dx][dy];
 					q.push(pipe(nx[i], ny[i], i + 1));
 				}
 			}
@@ -62,7 +59,6 @@ void func(int x, int y, int p) {
 						continue;
 					}
 
-					dp[nx[i]][ny[i]] += dp[dx][dy];
 					q.push(pipe(nx[i], ny[i], i + 1));
 				}
 			}
@@ -79,9 +75,6 @@ void func(int x, int y, int p) {
 					else if (i == 0 && (mp[nx[i]][ny[i]] == 1 || mp[dx][ny[i]] == 1 || mp[nx[i]][dy] == 1)) {
 						continue;
 					}
-					
-					dp[nx[i]][ny[i]] += dp[dx][dy];
-
 					q.push(pipe(nx[i], ny[i], i+2));
 				}
 			}
