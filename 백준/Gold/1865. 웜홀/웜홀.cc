@@ -58,20 +58,18 @@ int main() {
 			}
 		}
 		bool recycle = false;
-		for (int i = 1; i <= n; i++) {
-			for (int j = 0; j < v.size(); j++) {
-				int start = v[j].s;
-				int end = v[j].e;
-				int dis = v[j].t;
+		for (int j = 0; j < v.size(); j++) {
+			int start = v[j].s;
+			int end = v[j].e;
+			int dis = v[j].t;
 
-				if (dp[start] == INF) {
-					continue;
-				}
-				else {
-					if (dp[end] > dp[start] + dis) {
-						recycle = true;
-						break;
-					}
+			if (dp[start] == INF) {
+				continue;
+			}
+			else {
+				if (dp[end] > dp[start] + dis) {
+					recycle = true;
+					break;
 				}
 			}
 		}
