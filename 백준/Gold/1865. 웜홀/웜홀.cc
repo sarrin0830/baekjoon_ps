@@ -38,26 +38,28 @@ int main() {
 			v.push_back(edge(s, e, -t));
 		}
 
-
+		for (int i = 1; i <= n; i++) {
+			dp[i] = INF;
+		}
 		
 		dp[1] = 0;
-		for (int i = 1; i < n; i++) {
+		for (int i = 1; i <= n; i++) {
 			for (int j = 0; j < v.size(); j++) {
 				int start = v[j].s;
 				int end = v[j].e;
 				int dis = v[j].t;
 
-				if (dp[start] == INF) {
-					continue;
+				
+				
+				if (dp[end] > dp[start] + dis) {
+					dp[end] = dp[start] + dis;
+					dp[end] = dp[start] + dis;
 				}
-				else {
-					if (dp[end] > dp[start] + dis) {
-						dp[end] = dp[start] + dis;
-					}
-				}
+				
 			}
 		}
 		bool recycle = false;
+
 		for (int j = 0; j < v.size(); j++) {
 			int start = v[j].s;
 			int end = v[j].e;
@@ -68,6 +70,7 @@ int main() {
 			}
 			else {
 				if (dp[end] > dp[start] + dis) {
+					dp[end] = dp[start] + dis;
 					recycle = true;
 					break;
 				}
