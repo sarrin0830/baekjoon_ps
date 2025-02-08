@@ -6,33 +6,37 @@
 #include <queue>
 #define ll long long int
 using namespace std;
-int m, n;
+
 int mp[501][501];
 int dp[501][501];
-int dx[4]={1, -1, 0, 0};
+int n, m;
+int dx[4] = { 1,-1,0,0 };
 int dy[4] = { 0,0,1,-1 };
 
-int func(int x,int y) {
-    if (x == m && y == n) {
+int func(int a, int b) {
+    if (a == m && b == n) {
         return 1;
     }
-    else if (dp[x][y] != -1) {
-        return dp[x][y];
+    else if (dp[a][b] != -1) {
+        return dp[a][b];
     }
-    dp[x][y] = 0;
-    for(int i=0;i<4;i++){ 
-        int nx = x + dx[i];
-        int ny = y + dy[i];
+
+    dp[a][b] = 0;
+    for (int i = 0; i < 4; i++) {
+        int nx = a + dx[i];
+        int ny = b + dy[i];
         if (nx<1 || ny<1 || nx>m || ny>n) {
             continue;
         }
         else {
-            if (mp[nx][ny] < mp[x][y]) {
-                dp[x][y] = dp[x][y] + func(nx, ny);
+            if (mp[nx][ny] < mp[a][b]) {
+                dp[a][b] += func(nx, ny);
             }
         }
     }
-    return dp[x][y];
+    return dp[a][b];
+
+    
 }
 
 int main() {
@@ -46,6 +50,6 @@ int main() {
             dp[i][j] = -1;
         }
     }
-    cout << func(1, 1);
+    cout<<func(1, 1);
     return 0;
 } 
